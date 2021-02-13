@@ -3,7 +3,7 @@ ljurgs.unifi-config-gateway-json
 
 A role for managing config.gateway.json for site(s) on a Ubiquiti UniFi controller.
 
-I tested this against a CloudKey Gen1 and a USG. It should work with the USG Pro. I am not sure about the UDM/UDP Pro.
+I tested this against a CloudKey Gen1 and a USG. It should work with the USG Pro. I am not sure about the UDM/UDM Pro.
 
 Role Variables
 --------------
