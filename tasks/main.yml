@@ -1,0 +1,49 @@
+---
+- name: Ensure the site directories exist
+  file:
+    path: "{{ usg_controller_base_path }}/data/sites/{{ item.name }}"
+    state: directory
+    owner: "{{ usg_controller_process_user }}"
+    group: "{{ usg_controller_process_group }}"
+    mode: "0750"
+  loop: "{{ usg_controller_sites }}"
+
+- name: Write settings out to to config.gateway.json for each site
+  copy:
+    dest: "{{ usg_controller_base_path }}/data/sites/{{ item.name }}/config.gateway.json"
+    content: "{{ item.settings | to_nice_json }}"
+    owner: "{{ usg_controller_process_user }}"
+    group: "{{ usg_controller_process_group }}"
+    mode: "0640"
+  loop: "{{ usg_controller_sites }}"
+
+- name: If a provision of the gateway device(s) is desired, do that now
+  block:
+    - name: Login to the UniFi controller API
+      uri:
+        url: "{{ usg_controller_base_url }}/api/login"
+        method: POST
+        body_format: json
+        body:
+          username: "{{ usg_controller_username }}"
+          password: "{{ usg_controller_password }}"
+      register: login
+
+    - name: Provision the USG/USG Pro device
+      uri:
+        url: "{{ usg_controller_base_url }}/api/s/{{ item.name }}/cmd/devmgr/force-provision"
+        method: POST
+        body_format: json
+        body:
+          mac: "{{ item.usg_mac }}"
+        headers:
+          Cookie: "{{ login.cookies_string }}"
+      when: item.provision
+      loop: "{{ usg_controller_sites }}"
+
+    - name: Logout of the UniFi controller API
+      uri:
+        url: "{{ usg_controller_base_url }}/logout"
+        method: GET
+        headers:
+          Cookie: "{{ login.cookies_string }}"
