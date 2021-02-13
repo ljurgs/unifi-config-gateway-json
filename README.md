@@ -9,17 +9,22 @@ Role Variables
 --------------
 
     ---
-    usg_controller_base_path: /usr/lib/unifi # https://help.ui.com/hc/en-us/articles/115004872967-UniFi-Where-is-unifi-base-
+    # https://help.ui.com/hc/en-us/articles/115004872967-UniFi-Where-is-unifi-base-
+    usg_controller_base_path: /usr/lib/unifi 
     usg_controller_process_user: unifi
     usg_controller_process_group: unifi
     usg_controller_base_url: https://unifi-cloudkey.local:8443
     usg_controller_username: ubnt
     usg_controller_password: ubnt
     usg_controller_sites:
-      - name: default # Site name (e.g: https://unifi-cloudkey.local:8443/manage/site/default/)
-        provision: False # Should the cloud key force provisioning of the USG/USG Pro?
-        usg_mac: 78:xx:xx:xx:xx:xx # Lan facing MAC of the USG/USG Pro, this is avaible in the controller -> devices -> router -> details overview (Required if provision: True)
-        settings: # contents of the config.gateway.json as a dict (below is an example of iPXE based BIOS/UEFI booting)
+      # Site name (e.g: https://unifi-cloudkey.local:8443/manage/site/default/)
+      - name: default 
+        # Should the cloud key force provisioning of the USG/USG Pro?
+        provision: False 
+        # Lan facing MAC of the USG/USG Pro, this is avaible in the controller -> devices -> router -> details overview (Required if provision: True)
+        usg_mac: 78:xx:xx:xx:xx:xx
+        # contents of the config.gateway.json as a dict (below is an example of iPXE based BIOS/UEFI booting) 
+        settings: 
           service:
             dhcp-server:
               global-parameters:
