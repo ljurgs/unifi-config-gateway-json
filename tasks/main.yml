@@ -1,4 +1,12 @@
 ---
+- name: On newer firmware the data/sites folder is not auto created, ensure it exists
+  file:
+    path: "{{ usg_controller_base_path }}/data/sites"
+    state: directory
+    owner: "{{ usg_controller_process_user }}"
+    group: "{{ usg_controller_process_group }}"
+    mode: "0750"
+
 - name: Ensure the site directories exist
   file:
     path: "{{ usg_controller_base_path }}/data/sites/{{ item.name }}"
