@@ -1,5 +1,5 @@
 ---
-- name: On newer firmware the data/sites folder is not auto created, ensure it exists
+- name: On more recent firmware the data/sites folder is not auto created, ensure it exists
   file:
     path: "{{ usg_controller_base_path }}/data/sites"
     state: directory
@@ -25,7 +25,7 @@
     mode: "0640"
   loop: "{{ usg_controller_sites }}"
 
-- name: If a provision of the gateway device(s) is desired, do that now
+- name: If provisioning of the gateway device(s) is desired, perform it now
   block:
     - name: Login to the UniFi controller API
       uri:
@@ -35,9 +35,9 @@
         body:
           username: "{{ usg_controller_username }}"
           password: "{{ usg_controller_password }}"
-      register: login
+      register: controller_login
 
-    - name: Provision the USG/USG Pro device
+    - name: Provision the USG/USG Pro device(s)
       uri:
         url: "{{ usg_controller_base_url }}/api/s/{{ item.name }}/cmd/devmgr/force-provision"
         method: POST
@@ -45,7 +45,7 @@
         body:
           mac: "{{ item.usg_mac }}"
         headers:
-          Cookie: "{{ login.cookies_string }}"
+          Cookie: "{{ controller_login.cookies_string }}"
       when: item.provision
       loop: "{{ usg_controller_sites }}"
 
@@ -54,4 +54,4 @@
         url: "{{ usg_controller_base_url }}/logout"
         method: GET
         headers:
-          Cookie: "{{ login.cookies_string }}"
+          Cookie: "{{ controller_login.cookies_string }}"

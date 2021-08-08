@@ -37,13 +37,13 @@ The controller base path is required, this Ubiquiti doc explains how to find the
     usg_controller_process_user: unifi
     usg_controller_process_group: unifi
     
-I'm not sure that the Unifi controller can run as anything other user/group but the configuration files must be owned by the same uid/gid as the process.
+I'm not sure that the Unifi controller can run as any other user/group, in any case the configuration files must be owned by the same uid/gid as the process.
 
     usg_controller_base_url: https://unifi-cloudkey.local:8443
     usg_controller_username: ubnt
     usg_controller_password: ubnt
 
- The address/credentials you use to log into the controller web interface. You will not need these if you don't opt to use the `provision: True` option for any the sites.
+ The address/credentials used to log into the controller web interface. You will not need these if you don't opt to use the `provision: True` option for any the sites.
 
     usg_controller_sites:
       - name: default 

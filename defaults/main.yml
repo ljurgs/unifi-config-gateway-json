@@ -8,5 +8,5 @@ usg_controller_password: ubnt
 usg_controller_sites:
   - name: default # Site name (e.g: https://unifi-cloudkey.local:8443/manage/site/default/)
     provision: False # Should the cloud key force provisioning of the USG/USG Pro?
-    usg_mac: None # Lan facing MAC of the USG/USG Pro, this is avaible in the controller -> devices -> router -> details overview (Required if provision: True)
+    usg_mac: None # Lan facing MAC of the USG/USG Pro, this is available in the controller -> devices -> router -> details overview (Required if provision: True)
     settings: {} # contents of the config.gateway.json as a dict
