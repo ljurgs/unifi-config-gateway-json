@@ -1,5 +1,6 @@
 galaxy_info:
   author: ljurgs
+  role_name: unifi_config_gateway_json
   description: Manage a config.gateway.json file for site(s) on a Ubiquiti Unifi controller
   license: BSD-3-Clause
   min_ansible_version: 2.9

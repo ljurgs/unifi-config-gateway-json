@@ -1,4 +1,4 @@
-ljurgs.unifi-config-gateway-json
+ljurgs.unifi_config_gateway_json
 =========
 
 A role for managing config.gateway.json for site(s) on a Ubiquiti UniFi controller. 
