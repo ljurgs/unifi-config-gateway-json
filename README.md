@@ -110,7 +110,7 @@ Example Playbook
       vars_files:
         - vars/unifi.yml
       roles:
-         - { role: ljurgs.unifi-config-gateway-json }
+         - { role: ljurgs.unifi_config_gateway_json }
 
 License
 -------
