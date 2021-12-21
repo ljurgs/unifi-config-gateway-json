@@ -35,6 +35,7 @@
         body:
           username: "{{ usg_controller_username }}"
           password: "{{ usg_controller_password }}"
+        validate_certs: "{{ validate_certs }}"
       register: controller_login
 
     - name: Provision the USG/USG Pro device(s)
@@ -46,6 +47,7 @@
           mac: "{{ item.usg_mac }}"
         headers:
           Cookie: "{{ controller_login.cookies_string }}"
+        validate_certs: "{{ validate_certs }}"
       when: item.provision
       loop: "{{ usg_controller_sites }}"
 
@@ -55,3 +57,4 @@
         method: GET
         headers:
           Cookie: "{{ controller_login.cookies_string }}"
+        validate_certs: "{{ validate_certs }}"
