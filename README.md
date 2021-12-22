@@ -15,6 +15,7 @@ Role Variables
 --------------
 
     ---
+    validate_certs: True
     usg_controller_base_path: /usr/lib/unifi 
     usg_controller_process_user: unifi
     usg_controller_process_group: unifi
@@ -29,6 +30,10 @@ Role Variables
 
 Explanation of variables
 ------------------------
+
+    validate_certs: True
+
+When using the UniFi controller's self-signed SSL certificate, you should set this variable to `False` in order to not have the API fail.
 
     usg_controller_base_path: /usr/lib/unifi
 
